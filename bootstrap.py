@@ -5,21 +5,12 @@ into bounding boxes in KITTI format.
 
 Output of this script is data in KITTI format:
 
-  ./converted_data
-    ├── train/
-    │   ├── images/
-    │   │   ├── CARDS_COURTYARD_B_T_frame_0011.jpg
-    │   │   └── ......
-    │   └── labels/
-    │       ├── CARDS_COURTYARD_B_T_frame_0011.txt
-    │       └── ......
-    └── valid/
-        ├── images/
-        │   ├── ......
-        │   └── PUZZLE_OFFICE_T_S_frame_2697.jpg
-        └── labels/
-            ├── ......
-            └── PUZZLE_OFFICE_T_S_frame_2697.txt
+  ./egohands_kitti_formatted
+    ├── CARDS_COURTYARD_B_T_frame_0011.jpg
+    ├── CARDS_COURTYARD_B_T_frame_0011.txt
+    ├── ......
+    ├── PUZZLE_OFFICE_T_S_frame_2697.jpg
+    └── PUZZLE_OFFICE_T_S_frame_2697.txt
 """
 
 
@@ -41,12 +32,7 @@ EGOHANDS_DATASET_URL = \
     'http://vision.soic.indiana.edu/egohands_files/egohands_data.zip'
 EGOHANDS_DIR = './egohands'
 EGOHANDS_DATA_DIR = './egohands/_LABELLED_SAMPLES'
-CONVERTED_DIR = './converted_data'
-TRAIN_IMG_DIR = './converted_data/train/images'
-TRAIN_TXT_DIR = './converted_data/train/labels'
-VALID_IMG_DIR = './converted_data/valid/images'
-VALID_TXT_DIR = './converted_data/valid/labels'
-VALID_RATIO = 0.1
+CONVERTED_DIR = './egohands_kitti_formatted'
 
 VISUALIZE = False  # visualize each image (for debugging)
 
@@ -192,30 +178,6 @@ def egohands_to_kitti():
         convert_one_folder(folder)
 
 
-def kitti_split():
-    """Split KITTI data into training and validation sets."""
-    images = [os.path.splitext(f)[0]
-              for f in os.listdir(CONVERTED_DIR) if f.endswith('jpg')]
-    num_valid = int(len(images) * VALID_RATIO)
-    random.shuffle(images)
-
-    rmtree(VALID_IMG_DIR, ignore_errors=True)
-    rmtree(VALID_TXT_DIR, ignore_errors=True)
-    os.makedirs(VALID_IMG_DIR)
-    os.makedirs(VALID_TXT_DIR)
-    for image in images[:num_valid]:
-        move(os.path.join(CONVERTED_DIR, image + '.jpg'), VALID_IMG_DIR)
-        move(os.path.join(CONVERTED_DIR, image + '.txt'), VALID_TXT_DIR)
-
-    rmtree(TRAIN_IMG_DIR, ignore_errors=True)
-    rmtree(TRAIN_TXT_DIR, ignore_errors=True)
-    os.makedirs(TRAIN_IMG_DIR)
-    os.makedirs(TRAIN_TXT_DIR)
-    for image in images[num_valid:]:
-        move(os.path.join(CONVERTED_DIR, image + '.jpg'), TRAIN_IMG_DIR)
-        move(os.path.join(CONVERTED_DIR, image + '.txt'), TRAIN_TXT_DIR)
-
-
 def main():
     """main"""
     logging.basicConfig(level=logging.INFO)
@@ -234,9 +196,6 @@ def main():
     rmtree(CONVERTED_DIR, ignore_errors=True)
     os.makedirs(CONVERTED_DIR)
     egohands_to_kitti()
-
-    logging.info('Splitting training and validation set...')
-    kitti_split()
 
     logging.info('All done.')
 
