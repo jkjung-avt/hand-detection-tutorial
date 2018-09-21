@@ -101,7 +101,7 @@ def convert_kitti_to_tfrecords(data_dir, output_path, classes_to_use,
                                            output_path)
 
   images = sorted(tf.gfile.ListDirectory(image_dir))
-  images = [f for f in images if f.endswith(jpg)]  # only keep jpg files
+  images = [f for f in images if f.endswith('jpg')]  # only keep jpg files
   for idx, img_name in enumerate(images):
     img_num = img_name.split('.')[0]
     is_validation_img = idx < validation_set_size
