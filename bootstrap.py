@@ -17,12 +17,10 @@ Output of this script is data in KITTI format:
 import os
 import sys
 import math
-import random
 import logging
 import argparse
 from zipfile import ZipFile
-from shutil import rmtree, copyfile, move
-from urllib.request import urlretrieve
+from shutil import rmtree, copyfile
 
 import cv2
 from scipy.io import loadmat
@@ -51,9 +49,27 @@ def parse_args():
 
 def download_file(url, dest=None):
     """Download file from an URL."""
+    from tqdm import tqdm
+    import requests
+
     if not dest:
         dest = url.split('/')[-1]
-    urlretrieve(url, dest)
+
+    # Streaming, so we can iterate over the response.
+    r = requests.get(url, stream=True)
+
+    # Total size in bytes.
+    total_size = int(r.headers.get('content-length', 0))
+    assert total_size != 0
+    block_size = 1024
+    wrote = 0
+    with open(dest, 'wb') as f:
+        for data in tqdm(r.iter_content(block_size),
+                         total=math.ceil(total_size//block_size),
+                         unit='KB', unit_scale=True):
+            wrote = wrote + len(data)
+            f.write(data)
+    assert wrote == total_size
 
 
 def polygon_to_box(polygon):
@@ -131,7 +147,7 @@ def convert_one_folder(folder):
     annotation into KITTI format.
     """
     folder_path = os.path.join(EGOHANDS_DATA_DIR, folder)
-    logging.info('Converting %s' % folder_path)
+    logging.debug('Converting %s' % folder_path)
     frames = [os.path.splitext(f)[0]
               for f in os.listdir(folder_path) if f.endswith('jpg')]
     frames.sort()
@@ -180,7 +196,7 @@ def egohands_to_kitti():
 
 def main():
     """main"""
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.DEBUG)
 
     egohands_zip_path = EGOHANDS_DATASET_URL.split('/')[-1]
     if not os.path.isfile(egohands_zip_path):
