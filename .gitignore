@@ -9,4 +9,5 @@ __pycache__/
 # Project specifics
 egohands_data.zip
 egohands/
-converted_data/
+egohands_kitti_formatted/
+*.tfrecord
