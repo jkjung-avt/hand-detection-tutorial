@@ -1,16 +1,23 @@
-"""bootstrap.py
+"""prepare_egohands.py
 
-This script downloads the 'egohands' dataset and convert the annotations
+This script downloads the 'egohands' dataset and convert its annotations
 into bounding boxes in KITTI format.
 
-Output of this script is data in KITTI format:
+Output of this script:
 
+  ./egohands_data.zip
+  ./egohands
+    ├── (egohands dataset unzipped)
+    └── ......
   ./egohands_kitti_formatted
-    ├── CARDS_COURTYARD_B_T_frame_0011.jpg
-    ├── CARDS_COURTYARD_B_T_frame_0011.txt
-    ├── ......
-    ├── PUZZLE_OFFICE_T_S_frame_2697.jpg
-    └── PUZZLE_OFFICE_T_S_frame_2697.txt
+    ├── images
+    │   ├── CARDS_COURTYARD_B_T_frame_0011.jpg
+    │   ├── ......
+    │   └── PUZZLE_OFFICE_T_S_frame_2697.jpg
+    └── labels
+        ├── CARDS_COURTYARD_B_T_frame_0011.txt
+        ├── ......
+        └── PUZZLE_OFFICE_T_S_frame_2697.txt
 """
 
 
@@ -22,8 +29,9 @@ import argparse
 from zipfile import ZipFile
 from shutil import rmtree, copyfile
 
-import cv2
+import numpy as np
 from scipy.io import loadmat
+import cv2
 
 
 EGOHANDS_DATASET_URL = \
@@ -31,6 +39,8 @@ EGOHANDS_DATASET_URL = \
 EGOHANDS_DIR = './egohands'
 EGOHANDS_DATA_DIR = './egohands/_LABELLED_SAMPLES'
 CONVERTED_DIR = './egohands_kitti_formatted'
+CONVERTED_IMG_DIR = './egohands_kitti_formatted/images'
+CONVERTED_LBL_DIR = './egohands_kitti_formatted/labels'
 
 VISUALIZE = False  # visualize each image (for debugging)
 
@@ -83,10 +93,10 @@ def polygon_to_box(polygon):
     if len(polygon) < 3:  # a polygon has at least 3 vertices
         return None
 
-    x_min = min(polygon[:, 0])
-    y_min = min(polygon[:, 1])
-    x_max = max(polygon[:, 0])
-    y_max = max(polygon[:, 1])
+    x_min = np.min(polygon[:, 0])
+    y_min = np.min(polygon[:, 1])
+    x_max = np.max(polygon[:, 0])
+    y_max = np.max(polygon[:, 1])
 
     x_min = int(math.floor(x_min))
     y_min = int(math.floor(y_min))
@@ -159,11 +169,11 @@ def convert_one_folder(folder):
         src_jpg = frame + '.jpg'
         dst_jpg = folder + '_' + src_jpg
         copyfile(os.path.join(folder_path, src_jpg),
-                 os.path.join(CONVERTED_DIR, dst_jpg))
+                 os.path.join(CONVERTED_IMG_DIR, dst_jpg))
         # generate txt (the KITTI annotation corresponding to the jpg)
         dst_txt = folder + '_' + frame + '.txt'
         boxes = []
-        with open(os.path.join(CONVERTED_DIR, dst_txt), 'w') as f:
+        with open(os.path.join(CONVERTED_LBL_DIR, dst_txt), 'w') as f:
             for polygon in polygons[i]:
                 box = polygon_to_box(polygon)
                 if box:
@@ -171,7 +181,7 @@ def convert_one_folder(folder):
                     f.write(box_to_line(box) + '\n')
 
         if VISUALIZE:
-            img = cv2.imread(os.path.join(CONVERTED_DIR, dst_jpg))
+            img = cv2.imread(os.path.join(CONVERTED_IMG_DIR, dst_jpg))
             for box in boxes:
                 cv2.rectangle(img, (box[0], box[1]), (box[2], box[3]),
                               (0, 224, 0), 2)
@@ -190,6 +200,9 @@ def egohands_to_kitti():
       3. convert the original annotations ('polygon.mat') into
          bounding boxes and write a KITTI txt file for each image.
     """
+    rmtree(CONVERTED_DIR, ignore_errors=True)
+    os.makedirs(CONVERTED_IMG_DIR)
+    os.makedirs(CONVERTED_LBL_DIR)
     for folder in os.listdir(EGOHANDS_DATA_DIR):
         convert_one_folder(folder)
 
@@ -209,8 +222,6 @@ def main():
             zf.extractall(EGOHANDS_DIR)
 
     logging.info('Copying jpg files and converting annotations...')
-    rmtree(CONVERTED_DIR, ignore_errors=True)
-    os.makedirs(CONVERTED_DIR)
     egohands_to_kitti()
 
     logging.info('All done.')

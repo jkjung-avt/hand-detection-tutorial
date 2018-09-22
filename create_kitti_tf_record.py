@@ -17,12 +17,16 @@
 # ========================================================================
 
 
-r"""Convert KITTI detection dataset to TFRecord for object_detection.
+"""Convert KITTI detection dataset to TFRecord for object detection.
 
 Example usage:
+
     python3 create_kitti_tf_record.py \
             --data_dir=egohands_kitti_formatted \
-            --output_path=egohands
+            --output_path=data/egohands \
+            --classes_to_use=hand \
+            --label_map_path=data/egohands_label_map.pbtxt \
+            --validation_set_size=500
 """
 
 
@@ -34,6 +38,7 @@ from __future__ import print_function
 import hashlib
 import io
 import os
+import random
 
 import numpy as np
 import PIL.Image as pil
@@ -72,7 +77,9 @@ def convert_kitti_to_tfrecords(data_dir, output_path, classes_to_use,
   """Convert the KITTI detection dataset to TFRecords.
 
   Args:
-    data_dir: The full path containing all jpg and txt files.
+    data_dir: The full path containing KITTI formatted data, with all
+      jpg files located in <data_dir>/images/ and all txt files in
+      <data_dir>/labels/.
     output_path: The path to which TFRecord files will be written.
       The TFRecord with the training set will be located at:
       <output_path>_train.tfrecord
@@ -92,8 +99,8 @@ def convert_kitti_to_tfrecords(data_dir, output_path, classes_to_use,
   train_count = 0
   val_count = 0
 
-  annotation_dir = data_dir
-  image_dir = data_dir
+  annotation_dir = os.path.join(data_dir, 'labels')
+  image_dir = os.path.join(data_dir, 'images')
 
   train_writer = tf.python_io.TFRecordWriter('%s_train.tfrecord'%
                                              output_path)
@@ -102,6 +109,8 @@ def convert_kitti_to_tfrecords(data_dir, output_path, classes_to_use,
 
   images = sorted(tf.gfile.ListDirectory(image_dir))
   images = [f for f in images if f.endswith('jpg')]  # only keep jpg files
+  assert len(images) > 0
+  random.shuffle(images)
   for idx, img_name in enumerate(images):
     img_num = img_name.split('.')[0]
     is_validation_img = idx < validation_set_size
