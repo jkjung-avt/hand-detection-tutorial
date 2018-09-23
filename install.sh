@@ -57,5 +57,8 @@ cp -r pycocotools $MODELS_DIR/research/
 cd $ROOT_DIR
 
 # run a basic test to make sure tensorflow object detection is working
+echo
+echo
+echo Running model_builder_test.py
 PYTHONPATH=$MODELS_DIR/research:$MODELS_DIR/research/slim \
-$PYTHON $MODELS_DIR/research/object_detection/builders/model_builder_test.py
+    $PYTHON $MODELS_DIR/research/object_detection/builders/model_builder_test.py
