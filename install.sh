@@ -50,8 +50,8 @@ cd $ROOT_DIR
 # add pycocotools
 git clone https://github.com/cocodataset/cocoapi.git
 cd cocoapi/PythonAPI/
-sed -i '3s/python /python3/' Makefile
-sed -i '8s/python /python3/' Makefile
+sed -i '3s/python /python3 /' Makefile
+sed -i '8s/python /python3 /' Makefile
 make
 cp -r pycocotools $MODELS_DIR/research/
 cd $ROOT_DIR
