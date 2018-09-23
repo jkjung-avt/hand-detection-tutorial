@@ -15,7 +15,7 @@ fi
 # install python3 packages according to official documentation:
 # https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md
 #
-# assuming tensorflow, Pillow and matplotlob are already present
+# assuming tensorflow, Pillow and matplotlib are already present
 sudo $PIP install -U Cython
 sudo $PIP install -U contextlib2
 sudo $PIP install -U lxml
