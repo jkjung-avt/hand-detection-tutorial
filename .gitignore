@@ -6,8 +6,18 @@ __pycache__/
 # C extensions
 *.so
 
+# TensorFlow object detection installation stuffs
+cocoapi/
+protoc-3.5.1/
+ssd_mobilenet_v1_coco_2018_01_28.tar.gz
+ssd_mobilenet_v1_coco_2018_01_28/
+ssd_inception_v2_coco_2018_01_28.tar.gz
+ssd_inception_v2_coco_2018_01_28/
+
 # Project specifics
 egohands_data.zip
 egohands/
 egohands_kitti_formatted/
 *.tfrecord
+ssd_mobilenet_v1_egohands/
+
