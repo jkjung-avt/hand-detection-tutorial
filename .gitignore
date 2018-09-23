@@ -21,3 +21,4 @@ egohands_kitti_formatted/
 *.tfrecord
 ssd_mobilenet_v1_egohands/
 ssd_inception_v2_egohands/
+*eval/
