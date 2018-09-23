@@ -3,8 +3,8 @@
 usage()
 {
     echo "Usage: (one of the following)"
-    echo "    $ ./train.sh ssd_mobilenet_v1_egohands"
-    echo "    $ ./train.sh ssd_inception_v2_egohands"
+    echo "    $ ./eval.sh ssd_mobilenet_v1_egohands"
+    echo "    $ ./eval.sh ssd_inception_v2_egohands"
     exit
 }
 
@@ -16,21 +16,20 @@ case $1 in
     ssd_mobilenet_v1_egohands )
         PIPELINE_CONFIG_PATH=configs/ssd_mobilenet_v1_egohands.config
         MODEL_DIR=ssd_mobilenet_v1_egohands
-        NUM_TRAIN_STEPS=20000
+        EVAL_DIR=ssd_mobilenet_v1_egohands_eval
         ;;
     ssd_inception_v2_egohands )
         PIPELINE_CONFIG_PATH=configs/ssd_inception_v2_egohands.config
         MODEL_DIR=ssd_inception_v2_egohands
-        NUM_TRAIN_STEPS=20000
+        EVAL_DIR=ssd_inception_v2_egohands_eval
         ;;
     * )
         usage
 esac
 
 PYTHONPATH=`pwd`/models/research:`pwd`/models/research/slim \
-    python3 ./models/research/object_detection/model_main.py \
+    python3 ./models/research/object_detection/eval.py \
             --pipeline_config_path=$PIPELINE_CONFIG_PATH \
-            --model_dir=$MODEL_DIR \
-            --num_train_steps=$NUM_TRAIN_STEPS \
-            --sample_1_of_n_eval_samples=1 \
-            --alsologtostderr
+            --checkpoint_dir=$MODEL_DIR \
+            --eval_dir=$EVAL_DIR \
+            --logtostderr
