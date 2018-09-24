@@ -13,6 +13,8 @@ ssd_mobilenet_v1_coco_2018_01_28.tar.gz
 ssd_mobilenet_v1_coco_2018_01_28/
 ssd_inception_v2_coco_2018_01_28.tar.gz
 ssd_inception_v2_coco_2018_01_28/
+faster_rcnn_inception_v2_coco_2018_01_28.tar.gz
+faster_rcnn_inception_v2_coco_2018_01_28/
 
 # Project specifics
 egohands_data.zip
@@ -21,4 +23,5 @@ egohands_kitti_formatted/
 *.tfrecord
 ssd_mobilenet_v1_egohands/
 ssd_inception_v2_egohands/
+faster_rcnn_inception_v2_egohands/
 *eval/
