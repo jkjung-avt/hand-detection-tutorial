@@ -1,9 +1,9 @@
 Hand Detection Tutorial
 =======================
 
-This is a tutorial on how to train a 'hand detector' with TensorFlow object detection API.  This README outlines how to set up everything and train the object detection model locally.  You could refer to the following blog post for a more detailed tutorial.
+This is a tutorial on how to train a 'hand detector' with TensorFlow object detection API.  This README outlines how to set up everything and train the object detection model locally.  You could refer to the following blog post for more detailed description about the steps within.
 
-[Tutorial on Training a Hand Detector](https://jkjung-avt.github.io/hand-detection-tutorial/)
+[Training a Hand Detector with TensorFlow Object Detection API](https://jkjung-avt.github.io/hand-detection-tutorial/)
 
 Table of contents
 -----------------
@@ -89,7 +89,7 @@ Training
    $ ./train.sh ssd_mobilenet_v1_egohands
    ```
 
-   The training is set to run for 20,000 iterations.  It takes roughly 2.5 hours to finish on the desktop PC listed above.
+   The training is set to run for 20,000 iterations.  It takes roughly 2 hours to finish on the desktop PC listed above.
 
 5. Monitor the progress of training with TensorBoard, by executing `tensorboard` in another terminal.
 
