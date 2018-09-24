@@ -39,11 +39,13 @@ sed -i '147s/print /print(/' \
 sed -i '149s/labels_file"""$/[optional]labels_file""")/' \
        object_detection/dataset_tools/oid_hierarchical_labels_expansion.py
 sed -i '281s/loss_tensor in losses_dict.itervalues()/_, loss_tensor in losses_dict.items()/' \
-       object_detection/dataset_tools/oid_hierarchical_labels_expansion.py
-sed -i '380s/category_index.values()/list(category_index.values())/' \
-       object_detection/dataset_tools/oid_hierarchical_labels_expansion.py
+       object_detection/model_lib.py
+sed -i '380s/category_index.values(),/list(category_index.values()),/' \
+       object_detection/model_lib.py
 sed -i '390s/iteritems()/items()/' \
-       object_detection/dataset_tools/oid_hierarchical_labels_expansion.py
+       object_detection/model_lib.py
+sed -i '168s/range(num_boundaries),/list(range(num_boundaries)),' \
+       object_detection/utils/learning_schedules.py
 $ROOT_DIR/protoc-3.5.1/bin/protoc object_detection/protos/*.proto --python_out=.
 cd $ROOT_DIR
 
