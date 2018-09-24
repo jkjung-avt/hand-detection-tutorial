@@ -7,8 +7,9 @@ usage()
     echo
     echo "where <model_name> could be one of the following:"
     echo "    1. ssd_mobilenet_v1_egohands"
-    echo "    2. ssd_inception_v2_egohands"
-    echo "    3. faster_rcnn_inception_v2_egohands"
+    echo "    2. ssd_mobilenet_v2_egohands"
+    echo "    3. ssd_inception_v2_egohands"
+    echo "    4. faster_rcnn_inception_v2_egohands"
     echo
     exit
 }
@@ -21,6 +22,11 @@ case $1 in
     ssd_mobilenet_v1_egohands )
         PIPELINE_CONFIG_PATH=configs/ssd_mobilenet_v1_egohands.config
         MODEL_DIR=ssd_mobilenet_v1_egohands
+        NUM_TRAIN_STEPS=20000
+        ;;
+    ssd_mobilenet_v2_egohands )
+        PIPELINE_CONFIG_PATH=configs/ssd_mobilenet_v2_egohands.config
+        MODEL_DIR=ssd_mobilenet_v2_egohands
         NUM_TRAIN_STEPS=20000
         ;;
     ssd_inception_v2_egohands )
