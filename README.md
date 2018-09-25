@@ -3,7 +3,8 @@ Hand Detection Tutorial
 
 This is a tutorial on how to train a 'hand detector' with TensorFlow object detection API.  This README outlines how to set up everything and train the object detection model locally.  You could refer to the following blog post for more detailed description about the steps within.
 
-[Training a Hand Detector with TensorFlow Object Detection API](https://jkjung-avt.github.io/hand-detection-tutorial/)
+* [Training a Hand Detector with TensorFlow Object Detection API](https://jkjung-avt.github.io/hand-detection-tutorial/)
+* [Adapting the Hand Detector Tutorial to Your Own Data](https://jkjung-avt.github.io/object-detection-tutorial/)
 
 Table of contents
 -----------------
@@ -77,13 +78,13 @@ Training
          └── PUZZLE_OFFICE_T_S_frame_2697.txt
    ```
 
-2. Create the TFRecord files (train/val) needed to train the object detection model.  The `create_tfrecords,py` script would split the jpg images into 'train' (4,300) and 'val' (500) sets, and then generate `egohands_train.tfrecord` and `egohands` in the `data/` subdirectory.
+2. Create the TFRecord files (train/val) needed to train the object detection model.  The `create_tfrecords.py` script would split the jpg images into 'train' (4,300) and 'val' (500) sets, and then generate `data/egohands_train.tfrecord` and `data/egohands_val.tfrecord`.  This process might take a few minutes.  The resulting TFRecord files are roughly 1.1GB and 132MB in size.
 
    ```shell
    $ ./create_tfrecords.sh
    ```
 
-3. Review and modify the model config file if necessary.  For example, open the file `configs/ssd_mobilenet_v1_egohands.config` with an editor and do some editing.
+3. (Optional) Review and modify the model config file if necessary.  For example, open the file `configs/ssd_mobilenet_v1_egohands.config` with an editor and do some editing.
 
 4. Start training the model by invoking `./train.sh <model_name>`.  For example, to train the detector based on ssd_mobilenet_v1.  Do this:
 
