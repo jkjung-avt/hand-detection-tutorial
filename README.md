@@ -40,6 +40,8 @@ Follow the steps below to set up the environment for training tensorflow object 
    ```shell
    $ ./install.sh
    ```
+ 
+   If you are having trouble with the `sudo $PIP install -U xxx` commands in this script, you can replace them with `$PIP install --user -U xxx`.
 
 3. Download pretrained models from tensorflow object detection model zoo.
 
@@ -122,7 +124,7 @@ Evaluating the trained model
   $ tensorboard --logdir=ssd_mobilenet_v1_egohands_eval
   ```
 
-  Again, we open `http://localhost:6006` with a browser locally.  Click on the 'IMAGES' tab.
+  Again, open `http://localhost:6006` or `http://<IP.addr>:6006` with a browser.  Click on the 'IMAGES' tab.  You can then browse through all images in the validation set and check how well your trained model performs on those images.
 
   <p>
   <img src="doc/eval.png" alt="TensorBoard showing evaluation result of ssd_mobilenet_v1_egohands" height="300px"/>
