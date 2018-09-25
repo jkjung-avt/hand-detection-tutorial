@@ -37,7 +37,7 @@ case $1 in
     faster_rcnn_inception_v2_egohands )
         PIPELINE_CONFIG_PATH=configs/faster_rcnn_inception_v2_egohands.config
         MODEL_DIR=faster_rcnn_inception_v2_egohands
-        NUM_TRAIN_STEPS=20000
+        NUM_TRAIN_STEPS=50000
         ;;
     * )
         usage
