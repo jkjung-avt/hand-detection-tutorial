@@ -9,22 +9,13 @@ __pycache__/
 # TensorFlow object detection installation stuffs
 cocoapi/
 protoc-3.5.1/
-ssd_mobilenet_v1_coco_2018_01_28.tar.gz
-ssd_mobilenet_v1_coco_2018_01_28/
-ssd_mobilenet_v2_coco_2018_03_29.tar.gz
-ssd_mobilenet_v2_coco_2018_03_29/
-ssd_inception_v2_coco_2018_01_28.tar.gz
-ssd_inception_v2_coco_2018_01_28/
-faster_rcnn_inception_v2_coco_2018_01_28.tar.gz
-faster_rcnn_inception_v2_coco_2018_01_28/
+ssd_*.tar.gz
+ssd_*/
+faster_rcnn_*.tar.gz
+faster_rcnn_*/
 
 # Project specifics
 egohands_data.zip
 egohands/
 egohands_kitti_formatted/
 *.tfrecord
-ssd_mobilenet_v1_egohands/
-ssd_mobilenet_v2_egohands/
-ssd_inception_v2_egohands/
-faster_rcnn_inception_v2_egohands/
-*eval/

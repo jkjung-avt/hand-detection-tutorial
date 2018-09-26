@@ -9,7 +9,9 @@ usage()
     echo "    1. ssd_mobilenet_v1_egohands"
     echo "    2. ssd_mobilenet_v2_egohands"
     echo "    3. ssd_inception_v2_egohands"
-    echo "    4. faster_rcnn_inception_v2_egohands"
+    echo "    4. faster_rcnn_resnet50_egohands"
+    echo "    5. faster_rcnn_resnet101_egohands"
+    echo "    6. faster_rcnn_inception_v2_egohands"
     echo
     exit
 }
@@ -33,6 +35,16 @@ case $1 in
         PIPELINE_CONFIG_PATH=configs/ssd_inception_v2_egohands.config
         MODEL_DIR=ssd_inception_v2_egohands
         NUM_TRAIN_STEPS=20000
+        ;;
+    faster_rcnn_resnet50_egohands )
+        PIPELINE_CONFIG_PATH=configs/faster_rcnn_resnet50_egohands.config
+        MODEL_DIR=faster_rcnn_resnet50_egohands
+        NUM_TRAIN_STEPS=50000
+        ;;
+    faster_rcnn_resnet101_egohands )
+        PIPELINE_CONFIG_PATH=configs/faster_rcnn_resnet101_egohands.config
+        MODEL_DIR=faster_rcnn_resnet101_egohands
+        NUM_TRAIN_STEPS=50000
         ;;
     faster_rcnn_inception_v2_egohands )
         PIPELINE_CONFIG_PATH=configs/faster_rcnn_inception_v2_egohands.config
