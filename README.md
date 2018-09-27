@@ -118,7 +118,24 @@ Evaluating the trained model
   $ ./eval.sh ssd_mobilenet_v1_egohands
   ```
 
-  Next, run `tensorboard` from another terminal.  Note `logdir` points to the 'eval' subdirectory this time.
+  Here's an example output of the evaluation output.  Among all the numbers, the author would pay most attention to the 'AP @ IoU=0.50' value (0.967).
+
+  ```
+    Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.681
+    Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.967
+    Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.809
+    Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.079
+    Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.313
+    Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.717
+    Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.258
+    Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.736
+    Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.742
+    Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.118
+    Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.466
+    Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.774
+  ```
+
+  In addition, you could run `tensorboard` to inspect details of the evaluation.  Note `logdir` points to the 'eval' subdirectory below.
 
   ```shell
   $ cd ~/project/hand-detection-tutorial
