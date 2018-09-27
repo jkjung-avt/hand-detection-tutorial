@@ -6,12 +6,13 @@ usage()
     echo "Usage: ./eval.sh <model_name>"
     echo
     echo "where <model_name> could be one of the following:"
-    echo "    1. ssd_mobilenet_v1_egohands"
-    echo "    2. ssd_mobilenet_v2_egohands"
-    echo "    3. ssd_inception_v2_egohands"
-    echo "    4. faster_rcnn_resnet50_egohands"
-    echo "    5. faster_rcnn_resnet101_egohands"
-    echo "    6. faster_rcnn_inception_v2_egohands"
+    echo "    ssd_mobilenet_v1_egohands"
+    echo "    ssd_mobilenet_v2_egohands"
+    echo "    ssdlite_mobilenet_v2_egohands"
+    echo "    ssd_inception_v2_egohands"
+    echo "    faster_rcnn_resnet50_egohands"
+    echo "    faster_rcnn_resnet101_egohands"
+    echo "    faster_rcnn_inception_v2_egohands"
     echo
     exit
 }
@@ -30,6 +31,11 @@ case $1 in
         PIPELINE_CONFIG_PATH=configs/ssd_mobilenet_v2_egohands.config
         MODEL_DIR=ssd_mobilenet_v2_egohands
         EVAL_DIR=ssd_mobilenet_v2_egohands_eval
+        ;;
+    ssdlite_mobilenet_v2_egohands )
+        PIPELINE_CONFIG_PATH=configs/ssdlite_mobilenet_v2_egohands.config
+        MODEL_DIR=ssdlite_mobilenet_v2_egohands
+        EVAL_DIR=ssdlite_mobilenet_v2_egohands_eval
         ;;
     ssd_inception_v2_egohands )
         PIPELINE_CONFIG_PATH=configs/ssd_inception_v2_egohands.config
