@@ -10,9 +10,11 @@ usage()
     echo "    ssd_mobilenet_v2_egohands"
     echo "    ssdlite_mobilenet_v2_egohands"
     echo "    ssd_inception_v2_egohands"
+    echo "    rfcn_resnet101_egohands"
     echo "    faster_rcnn_resnet50_egohands"
     echo "    faster_rcnn_resnet101_egohands"
     echo "    faster_rcnn_inception_v2_egohands"
+    echo "    faster_rcnn_inception_resnet_v2_atrous_egohands"
     echo
     exit
 }
@@ -42,6 +44,11 @@ case $1 in
         MODEL_DIR=ssd_inception_v2_egohands
         EVAL_DIR=ssd_inception_v2_egohands_eval
         ;;
+    rfcn_resnet101_egohands )
+        PIPELINE_CONFIG_PATH=configs/rfcn_resnet101_egohands.config
+        MODEL_DIR=rfcn_resnet101_egohands
+        EVAL_DIR=rfcn_resnet101_egohands_eval
+        ;;
     faster_rcnn_resnet50_egohands )
         PIPELINE_CONFIG_PATH=configs/faster_rcnn_resnet50_egohands.config
         MODEL_DIR=faster_rcnn_resnet50_egohands
@@ -56,6 +63,11 @@ case $1 in
         PIPELINE_CONFIG_PATH=configs/faster_rcnn_inception_v2_egohands.config
         MODEL_DIR=faster_rcnn_inception_v2_egohands
         EVAL_DIR=faster_rcnn_inception_v2_egohands_eval
+        ;;
+    faster_rcnn_inception_resnet_v2_atrous_egohands )
+        PIPELINE_CONFIG_PATH=configs/faster_rcnn_inception_resnet_v2_atrous_egohands.config
+        MODEL_DIR=faster_rcnn_inception_resnet_v2_atrous_egohands
+        EVAL_DIR=faster_rcnn_inception_resnet_v2_atrous_egohands_eval
         ;;
     * )
         usage

@@ -10,9 +10,11 @@ usage()
     echo "    ssd_mobilenet_v2_egohands"
     echo "    ssdlite_mobilenet_v2_egohands"
     echo "    ssd_inception_v2_egohands"
+    echo "    rfcn_resnet101_egohands"
     echo "    faster_rcnn_resnet50_egohands"
     echo "    faster_rcnn_resnet101_egohands"
     echo "    faster_rcnn_inception_v2_egohands"
+    echo "    faster_rcnn_inception_resnet_v2_atrous_egohands"
     echo
     exit
 }
@@ -42,6 +44,11 @@ case $1 in
         MODEL_DIR=ssd_inception_v2_egohands
         NUM_TRAIN_STEPS=20000
         ;;
+    rfcn_resnet101_egohands )
+        PIPELINE_CONFIG_PATH=configs/rfcn_resnet101_egohands.config
+        MODEL_DIR=rfcn_resnet101_egohands
+        NUM_TRAIN_STEPS=50000
+        ;;
     faster_rcnn_resnet50_egohands )
         PIPELINE_CONFIG_PATH=configs/faster_rcnn_resnet50_egohands.config
         MODEL_DIR=faster_rcnn_resnet50_egohands
@@ -55,6 +62,11 @@ case $1 in
     faster_rcnn_inception_v2_egohands )
         PIPELINE_CONFIG_PATH=configs/faster_rcnn_inception_v2_egohands.config
         MODEL_DIR=faster_rcnn_inception_v2_egohands
+        NUM_TRAIN_STEPS=50000
+        ;;
+    faster_rcnn_inception_resnet_v2_atrous_egohands )
+        PIPELINE_CONFIG_PATH=configs/faster_rcnn_inception_resnet_v2_atrous_egohands.config
+        MODEL_DIR=faster_rcnn_inception_resnet_v2_atrous_egohands
         NUM_TRAIN_STEPS=50000
         ;;
     * )

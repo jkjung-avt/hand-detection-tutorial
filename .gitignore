@@ -12,6 +12,7 @@ cocoapi/
 protoc-3.5.1/
 ssd_*/
 ssdlite_*/
+rfcn_*/
 faster_rcnn_*/
 
 # Project specifics
