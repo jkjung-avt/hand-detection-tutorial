@@ -7,11 +7,12 @@ __pycache__/
 *.so
 
 # TensorFlow object detection installation stuffs
+*.tar.gz
 cocoapi/
 protoc-3.5.1/
-ssd_*.tar.gz
 ssd_*/
-faster_rcnn_*.tar.gz
+ssdlite_*/
+rfcn_*/
 faster_rcnn_*/
 
 # Project specifics
