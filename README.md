@@ -6,12 +6,15 @@ This is a tutorial on how to train a 'hand detector' with TensorFlow object dete
 * [Training a Hand Detector with TensorFlow Object Detection API](https://jkjung-avt.github.io/hand-detection-tutorial/)
 * [Adapting the Hand Detector Tutorial to Your Own Data](https://jkjung-avt.github.io/object-detection-tutorial/)
 
+
 Table of contents
 -----------------
 
 * [Setup](#setup)
 * [Training](#training)
 * [Evaluating the trained model](#evluating)
+* [Testing the trained model with an image](#testing)
+* [Deploying the trained model onto Jetson TX2](#deploying)
 
 
 <a name="setup"></a>
@@ -49,6 +52,7 @@ Follow the steps below to set up the environment for training tensorflow object 
    ```shell
    $ ./download_pretrained_models.sh
    ```
+
 
 <a name="training"></a>
 Training
@@ -94,6 +98,12 @@ Training
 
    The training is set to run for 20,000 iterations.  It takes roughly 2 hours to finish on the desktop PC listed above.
 
+   If you have multiple GPUs, you could specify which GPU to use for the training with the [`CUDA_VISIBLE_DEVICES`](https://www.tensorflow.org/guide/using_gpu) environment variable.  For example, the following command starts a training session for the `faster_rcnn_inception_v2_egohands` model on the 2nd GPU (GPU #1).
+
+   ```shell
+   $ CUDA_VISIBLE_DEVICES=1 ./train.sh faster_rcnn_inception_v2_egohands
+   ```
+
 5. Monitor the progress of training with TensorBoard, by executing `tensorboard` in another terminal.
 
    ```shell
@@ -115,6 +125,7 @@ Evaluating the trained model
 * The trained model could be evaluated by simply executing the `./eval.sh` script.  For example,
 
   ```shell
+  # similar to train.sh, use 'CUDA_VISIBLE_DEVICES' to specify GPU
   $ ./eval.sh ssd_mobilenet_v1_egohands
   ```
 
@@ -147,3 +158,35 @@ Evaluating the trained model
   <p>
   <img src="doc/eval.png" alt="TensorBoard showing evaluation result of ssd_mobilenet_v1_egohands" height="300px"/>
   </p> 
+
+
+<a name="testing"></a>
+Testing the trained model with an image
+---------------------------------------
+
+* This repo also includes scripts to test the trained model with your own image file.  For example, the following commands would convert a trained `ssdlite_mobilenet_v2_egohands` model into a frozen graph (saved under `model_exported/`), and then use the graph to detect hands in `data/jk-son-hands.jpg`.  The output image, with bounding boxes overlaid, would be saved as `detection_output.jpg`.
+
+  ```shell
+  $ CUDA_VISIBLE_DEVICES=0 ./export.sh ssdlite_mobilenet_v2_egohands
+  $ CUDA_VISIBLE_DEVICES=0 ./detect_image.sh data/jk-son-hands.jpg 
+  ```
+
+  You can then check out the output image by, say,
+
+  ```shell
+  $ display detection_output.jpg
+  ```
+
+  <p>
+  <img src="doc/ssdlite_mobilenet_v2_result.jpg" alt="Detection result with ssdlite_mobilenet_v2_egohands" height="300px"/>
+  </p> 
+
+
+<a name="deploying"></a>
+Deploying the trained model onto Jetson TX2
+-------------------------------------------
+
+Please refer to the following blog post and GitHub repo.
+
+* [Deploying the Hand Detector onto Jetson TX2](https://jkjung-avt.github.io/hand-detection-on-tx2/)
+* [jkjung-avt/tf_trt_models](https://github.com/jkjung-avt/tf_trt_models)

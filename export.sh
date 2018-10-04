@@ -3,7 +3,7 @@
 usage()
 {
     echo
-    echo "Usage: ./trash.sh <model_name>"
+    echo "Usage: ./export.sh <model_name>"
     echo
     echo "where <model_name> could be one of the following:"
     echo "    ssd_mobilenet_v1_egohands"
@@ -44,14 +44,15 @@ case $1 in
 esac
 
 PIPELINE_CONFIG_PATH=configs/${MODEL_DIR}.config
+CHECKPOINT_PREFIX=${MODEL_DIR}/model.ckpt-${NUM_TRAIN_STEPS}
+OUTPUT_DIR=model_exported
 
-# clear old training logs
-rm -rf ${MODEL_DIR}
+# clear old exported model
+rm -rf ${OUTPUT_DIR}
 
 PYTHONPATH=`pwd`/models/research:`pwd`/models/research/slim \
-    python3 ./models/research/object_detection/model_main.py \
+    python3 ./models/research/object_detection/export_inference_graph.py \
+            --input_type=image_tensor \
             --pipeline_config_path=${PIPELINE_CONFIG_PATH} \
-            --model_dir=${MODEL_DIR} \
-            --num_train_steps=${NUM_TRAIN_STEPS} \
-            --sample_1_of_n_eval_samples=1 \
-            --alsologtostderr
+            --trained_checkpoint_prefix=${CHECKPOINT_PREFIX} \
+            --output_directory=${OUTPUT_DIR}

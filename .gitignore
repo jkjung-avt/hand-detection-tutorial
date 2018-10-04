@@ -20,3 +20,4 @@ egohands_data.zip
 egohands/
 egohands_kitti_formatted/
 *.tfrecord
+model_exported/
