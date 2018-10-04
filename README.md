@@ -94,6 +94,12 @@ Training
 
    The training is set to run for 20,000 iterations.  It takes roughly 2 hours to finish on the desktop PC listed above.
 
+   If you have multiple GPUs, you could specify which GPU to use for the training with the [`CUDA_VISIBLE_DEVICES`](https://www.tensorflow.org/guide/using_gpu) environment variable.  For example, the following command starts a training session for the `faster_rcnn_inception_v2_egohands` model on the 2nd GPU (GPU #1).
+
+   ```shell
+   $ CUDA_VISIBLE_DEVICES=1 ./train.sh faster_rcnn_inception_v2_egohands
+   ```
+
 5. Monitor the progress of training with TensorBoard, by executing `tensorboard` in another terminal.
 
    ```shell
@@ -115,6 +121,7 @@ Evaluating the trained model
 * The trained model could be evaluated by simply executing the `./eval.sh` script.  For example,
 
   ```shell
+  # similar to train.sh, use 'CUDA_VISIBLE_DEVICES' to specify GPU
   $ ./eval.sh ssd_mobilenet_v1_egohands
   ```
 
