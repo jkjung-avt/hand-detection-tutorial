@@ -44,7 +44,7 @@ sed -i '380s/category_index.values(),/list(category_index.values()),/' \
        object_detection/model_lib.py
 sed -i '390s/iteritems()/items()/' \
        object_detection/model_lib.py
-sed -i '168s/range(num_boundaries),/list(range(num_boundaries)),' \
+sed -i '168s/range(num_boundaries),/list(range(num_boundaries)),/' \
        object_detection/utils/learning_schedules.py
 $ROOT_DIR/protoc-3.5.1/bin/protoc object_detection/protos/*.proto --python_out=.
 cd $ROOT_DIR
