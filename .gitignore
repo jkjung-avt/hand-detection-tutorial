@@ -21,3 +21,4 @@ egohands/
 egohands_kitti_formatted/
 *.tfrecord
 model_exported/
+detection_output.jpg
