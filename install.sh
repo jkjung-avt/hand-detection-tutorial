@@ -32,20 +32,23 @@ unzip /tmp/${filename} -d protoc-3.5.1
 git submodule update --init
 cd $MODELS_DIR
 cd research
-sed -i '516s/print num_classes, num_anchors/print(num_classes, num_anchors)/' \
+sed -i "157s/print '--annotation_type expected value is 1 or 2.'/print('--annotation_type expected value is 1 or 2.')/" \
+       object_detection/dataset_tools/oid_hierarchical_labels_expansion.py
+sed -i "516s/print num_classes, num_anchors/print(num_classes, num_anchors)/" \
        object_detection/meta_architectures/ssd_meta_arch_test.py
-sed -i '147s/print /print(/' \
-       object_detection/dataset_tools/oid_hierarchical_labels_expansion.py
-sed -i '149s/labels_file"""$/[optional]labels_file""")/' \
-       object_detection/dataset_tools/oid_hierarchical_labels_expansion.py
-sed -i '281s/loss_tensor in losses_dict.itervalues()/_, loss_tensor in losses_dict.items()/' \
+sed -i "282s/losses_dict.itervalues()/losses_dict.values()/" \
        object_detection/model_lib.py
-sed -i '380s/category_index.values(),/list(category_index.values()),/' \
+sed -i "381s/category_index.values(),/list(category_index.values()),/" \
        object_detection/model_lib.py
-sed -i '390s/iteritems()/items()/' \
+sed -i "391s/eval_metric_ops.iteritems()/eval_metric_ops.items()/" \
        object_detection/model_lib.py
-sed -i '168s/range(num_boundaries),/list(range(num_boundaries)),/' \
-       object_detection/utils/learning_schedules.py
+sed -i "842s/print 'Scores and tpfp per class label: {}'.format(class_index)/print('Scores and tpfp per class label: {}'.format(class_index))/" \
+       object_detection/utils/object_detection_evaluation.py
+sed -i "843s/print tp_fp_labels/print(tp_fp_labels)/" \
+       object_detection/utils/object_detection_evaluation.py
+sed -i "844s/print scores/print(scores)/" \
+       object_detection/utils/object_detection_evaluation.py
+
 $ROOT_DIR/protoc-3.5.1/bin/protoc object_detection/protos/*.proto --python_out=.
 cd $ROOT_DIR
 
