@@ -46,8 +46,9 @@ EVAL_DIR=${MODEL_DIR}_eval
 rm -rf ${EVAL_DIR}
 
 PYTHONPATH=`pwd`/models/research:`pwd`/models/research/slim \
-    python3 ./models/research/object_detection/eval.py \
+    python3 ./models/research/object_detection/model_main.py \
             --pipeline_config_path=${PIPELINE_CONFIG_PATH} \
             --checkpoint_dir=${MODEL_DIR} \
-            --eval_dir=${EVAL_DIR} \
-            --logtostderr
+            --model_dir=${EVAL_DIR} \
+            --run_once \
+            --alsologtostderr
