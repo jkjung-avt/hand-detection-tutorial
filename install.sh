@@ -65,5 +65,6 @@ cd $ROOT_DIR
 echo
 echo
 echo Running model_builder_test.py
+CUDA_VISIBLE_DEVICES=0 \
 PYTHONPATH=$MODELS_DIR/research:$MODELS_DIR/research/slim \
     $PYTHON $MODELS_DIR/research/object_detection/builders/model_builder_test.py
