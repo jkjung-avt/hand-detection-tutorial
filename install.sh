@@ -42,6 +42,8 @@ sed -i "381s/category_index.values(),/list(category_index.values()),/" \
        object_detection/model_lib.py
 sed -i "391s/eval_metric_ops.iteritems()/eval_metric_ops.items()/" \
        object_detection/model_lib.py
+sed -i "225s/reversed(zip(output_feature_map_keys, output_feature_maps_list)))/reversed(list(zip(output_feature_map_keys, output_feature_maps_list))))/" \
+       object_detection/models/feature_map_generators.py
 sed -i "842s/print 'Scores and tpfp per class label: {}'.format(class_index)/print('Scores and tpfp per class label: {}'.format(class_index))/" \
        object_detection/utils/object_detection_evaluation.py
 sed -i "843s/print tp_fp_labels/print(tp_fp_labels)/" \
