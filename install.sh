@@ -50,6 +50,8 @@ sed -i "843s/print tp_fp_labels/print(tp_fp_labels)/" \
        object_detection/utils/object_detection_evaluation.py
 sed -i "844s/print scores/print(scores)/" \
        object_detection/utils/object_detection_evaluation.py
+sed -n '31p' object_detection/eval_util.py | grep -q vis_utils &&
+    ex -s -c 31m23 -c w -c q object_detection/eval_util.py
 
 $ROOT_DIR/protoc-3.5.1/bin/protoc object_detection/protos/*.proto --python_out=.
 cd $ROOT_DIR
