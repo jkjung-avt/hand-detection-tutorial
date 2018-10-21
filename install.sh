@@ -16,10 +16,17 @@ fi
 # https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md
 #
 # assuming tensorflow, Pillow and matplotlib are already present
-sudo $PIP install -U Cython
-sudo $PIP install -U contextlib2
-sudo $PIP install -U lxml
-sudo $PIP install -U jupyter
+$PIP install -U Cython
+$PIP install -U contextlib2
+$PIP install -U lxml
+$PIP install -U jupyter
+$PIP install -U matplotlib
+$PIP install -U Pillow
+$PIP install -U scipy
+$PIP install -U opencv-python
+$PIP install -U tqdm
+$PIP install -U requests
+
 
 # download protoc-3.5.1
 BASE_URL="https://github.com/google/protobuf/releases/download/v3.5.1/"
