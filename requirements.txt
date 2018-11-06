@@ -1,0 +1,9 @@
+matplotlib
+Pillow
+scipy
+Cython
+contextlib2
+lxml
+jupyter
+tqdm
+requests

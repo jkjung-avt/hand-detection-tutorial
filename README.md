@@ -29,7 +29,7 @@ Just for reference, the code in this repository has been tested on a desktop PC 
 * cuDNN 7.1.4
 * TensorFlow 1.10.0
 
-Follow the steps below to set up the environment for training tensorflow object detection models.  Make sure tensorflow-gpu and matplotlib (python3 packages) have been installed on the system already.
+This tutorial uses python3 for training and testing the TensorFlow object detection models.  Follow the steps below to set up the environment for training the models.  Make sure `tensorflow-gpu` or `tensorflow` (python3 packages) has been installed on the system already.
 
 1. Clone this repository.
 
@@ -39,15 +39,21 @@ Follow the steps below to set up the environment for training tensorflow object 
    $ cd hand-detection-tutorial
    ```
 
-2. Run the installation script.  Make sure the last step in the script, `Running model_builder_test.py`, finishes without error, before continuing on.
+2. Install required python3 packages.
+
+   ```shell
+   $ sudo pip3 install -r requirements.txt
+   ```
+
+   In case you are having trouble with `sudo`, you can do `pip3 install --user -r requirements.txt` instead.
+ 
+3. Run the installation script.  Make sure the last step in the script, `Running model_builder_test.py`, finishes without error, before continuing on.
 
    ```shell
    $ ./install.sh
    ```
  
-   If you are having trouble with the `sudo $PIP install -U xxx` commands in this script, you can replace them with `$PIP install --user -U xxx`.
-
-3. Download pretrained models from tensorflow object detection model zoo.
+4. Download pretrained models from TensorFlow Object Detection Model Zoo.
 
    ```shell
    $ ./download_pretrained_models.sh
