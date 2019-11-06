@@ -189,10 +189,13 @@ Testing the trained model with an image
 
 
 <a name="deploying"></a>
-Deploying the trained model onto Jetson TX2
--------------------------------------------
+Deploying the trained model onto Jetson TX2/Nano
+------------------------------------------------
 
-Please refer to the following blog post and GitHub repo.
+Please refer to the following GitHub repos and blog posts.
 
-* [Deploying the Hand Detector onto Jetson TX2](https://jkjung-avt.github.io/hand-detection-on-tx2/)
+* Demo #3 of [jkjung-avt/tensorrt_demos](https://github.com/jkjung-avt/tensorrt_demos)
 * [jkjung-avt/tf_trt_models](https://github.com/jkjung-avt/tf_trt_models)
+* [Deploying the Hand Detector onto Jetson TX2](https://jkjung-avt.github.io/hand-detection-on-tx2/)
+* [TensorFlow/TensorRT (TF-TRT) Revisited](https://jkjung-avt.github.io/tf-trt-revisited/)
+* [Testing TF-TRT Object Detectors on Jetson Nano](https://jkjung-avt.github.io/tf-trt-on-nano/)
