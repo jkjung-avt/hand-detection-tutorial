@@ -194,7 +194,7 @@ Deploying the trained model onto Jetson TX2/Nano
 
 Please refer to the following GitHub repos and blog posts.
 
-* Demo #3 of [jkjung-avt/tensorrt_demos](https://github.com/jkjung-avt/tensorrt_demos)
+* Demo #3 ('ssd') of [jkjung-avt/tensorrt_demos](https://github.com/jkjung-avt/tensorrt_demos) -> The trained 'ssd_mobilenet_v1_egohands' model could run as fast as ~31 frames per seconds (FPS) on Jetson Nano using 'trt_ssd_async.py'!
 * [jkjung-avt/tf_trt_models](https://github.com/jkjung-avt/tf_trt_models)
 * [Deploying the Hand Detector onto Jetson TX2](https://jkjung-avt.github.io/hand-detection-on-tx2/)
 * [TensorFlow/TensorRT (TF-TRT) Revisited](https://jkjung-avt.github.io/tf-trt-revisited/)
